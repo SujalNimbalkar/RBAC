@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1754243141545dddy3wi2u",
+    "title": "Daily Production Report - Week 2 Day 2",
+    "dailyPlanId": "17542385008728vpxabsxe",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "createdAt": "2025-08-03T17:45:41.545Z",
+    "updatedAt": "2025-08-03T18:34:14.732Z",
+    "entries": [
+      {
+        "h1Actual": 100,
+        "h2Actual": 0,
+        "otActual": 0,
+        "actualProduction": 100,
+        "qualityDefects": 0,
+        "reason": "",
+        "correctiveActions": "",
+        "responsiblePerson": "",
+        "targetCompletionDate": "",
+        "id": "1754246054732xv69m81bl",
+        "productionPercentage": null
+      }
+    ],
+    "submittedAt": "2025-08-03T18:34:14.732Z"
+  },
+  {
+    "id": "17542437441822uv1xmk6v",
+    "title": "Daily Production Report - Week 2 Day 1",
+    "dailyPlanId": "1754238500872zc2i25205",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "createdAt": "2025-08-03T17:55:44.183Z",
+    "updatedAt": "2025-08-03T18:32:49.438Z",
+    "entries": [
+      {
+        "h1Actual": 100,
+        "h2Actual": 100,
+        "otActual": 0,
+        "actualProduction": 200,
+        "qualityDefects": 0,
+        "reason": "abc",
+        "correctiveActions": "abc",
+        "responsiblePerson": "xyz",
+        "targetCompletionDate": "2025-08-05",
+        "id": "1754245969437i115swei6",
+        "productionPercentage": null
+      }
+    ],
+    "submittedAt": "2025-08-03T18:32:49.437Z"
+  }
+]

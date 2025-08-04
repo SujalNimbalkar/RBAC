@@ -1,0 +1,157 @@
+[
+  {
+    "id": "17542378147833dmqgrz7i",
+    "type": "monthly",
+    "title": "Monthly Production Plan - September 2025",
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "175423781476112ijzir2p",
+    "deadline": "2025-09-27T18:30:00.000Z",
+    "createdAt": "2025-08-03T16:16:54.783Z",
+    "updatedAt": "2025-08-03T16:17:54.756Z"
+  },
+  {
+    "id": "17542378747593qylhgenj",
+    "type": "weekly",
+    "title": "Weekly Production Plan - Week 1 (1-7) - September 2025",
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "1754237874757nn5sy13cl",
+    "createdAt": "2025-08-03T16:17:54.759Z",
+    "updatedAt": "2025-08-03T16:18:26.003Z"
+  },
+  {
+    "id": "1754237874759yw4l3re2q",
+    "type": "weekly",
+    "title": "Weekly Production Plan - Week 2 (8-14) - September 2025",
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "1754237874757sr8x5xc73",
+    "createdAt": "2025-08-03T16:17:54.759Z",
+    "updatedAt": "2025-08-03T16:28:20.868Z"
+  },
+  {
+    "id": "1754237874760dmhsgyjwk",
+    "type": "weekly",
+    "title": "Weekly Production Plan - Week 3 (15-21) - September 2025",
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "17542378747589vqjtefmh",
+    "createdAt": "2025-08-03T16:17:54.760Z",
+    "updatedAt": "2025-08-03T16:17:54.760Z"
+  },
+  {
+    "id": "1754237874760uw14c8qq6",
+    "type": "weekly",
+    "title": "Weekly Production Plan - Week 4 (22-28) - September 2025",
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "1754237874758y3hnofj3p",
+    "createdAt": "2025-08-03T16:17:54.760Z",
+    "updatedAt": "2025-08-03T16:17:54.760Z"
+  },
+  {
+    "id": "17542378747611z1ckuj80",
+    "type": "weekly",
+    "title": "Weekly Production Plan - Week 5 (29-30) - September 2025",
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "planId": "175423787475843pq9obiw",
+    "createdAt": "2025-08-03T16:17:54.761Z",
+    "updatedAt": "2025-08-03T16:17:54.761Z"
+  },
+  {
+    "id": "1754238500882h0vru7mjk",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 1",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "1754238500872zc2i25205",
+    "createdAt": "2025-08-03T16:28:20.882Z",
+    "updatedAt": "2025-08-03T17:55:44.181Z"
+  },
+  {
+    "id": "1754238500888qivpz2q8i",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 2",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "17542385008728vpxabsxe",
+    "createdAt": "2025-08-03T16:28:20.889Z",
+    "updatedAt": "2025-08-03T17:45:41.544Z"
+  },
+  {
+    "id": "1754238500892zttttpo5n",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 3",
+    "status": "pending",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "1754238500872rylirw27j",
+    "createdAt": "2025-08-03T16:28:20.892Z",
+    "updatedAt": "2025-08-03T16:28:20.892Z"
+  },
+  {
+    "id": "1754238500895anyrv0b1u",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 4",
+    "status": "pending",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "1754238500872yzpdqwte7",
+    "createdAt": "2025-08-03T16:28:20.895Z",
+    "updatedAt": "2025-08-03T16:28:20.895Z"
+  },
+  {
+    "id": "1754238500900bybqlf1ja",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 5",
+    "status": "pending",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "1754238500872lupbvjkqz",
+    "createdAt": "2025-08-03T16:28:20.900Z",
+    "updatedAt": "2025-08-03T16:28:20.900Z"
+  },
+  {
+    "id": "17542385009036832e302j",
+    "type": "daily",
+    "title": "Daily Production Plan - Week 2 Day 6",
+    "status": "pending",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "175423850087281osx0vdq",
+    "createdAt": "2025-08-03T16:28:20.903Z",
+    "updatedAt": "2025-08-03T16:28:20.903Z"
+  },
+  {
+    "id": "1754243141545dlvi6zhp2",
+    "type": "report",
+    "title": "Daily Production Report - Week 2 Day 2",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "1754243141545dddy3wi2u",
+    "createdAt": "2025-08-03T17:45:41.545Z",
+    "updatedAt": "2025-08-03T18:38:00.202Z"
+  },
+  {
+    "id": "1754243744183qqabz2ipt",
+    "type": "report",
+    "title": "Daily Production Report - Week 2 Day 1",
+    "status": "completed",
+    "assignedTo": "mdsxto8ydv4dknv25i",
+    "assignedRole": "mdsvs0sm4g2ebejicna",
+    "planId": "17542437441822uv1xmk6v",
+    "createdAt": "2025-08-03T17:55:44.183Z",
+    "updatedAt": "2025-08-03T18:38:00.202Z"
+  }
+]

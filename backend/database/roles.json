@@ -1,0 +1,149 @@
+[
+  {
+    "name": "admin",
+    "description": "System administrator with full access",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r0lg0r01sr59r",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0r94ldgl6nmw05",
+      "mdsvs0rdwfl54ypnc3",
+      "mdsvs0rfnd0x0xmuqlb",
+      "mdsvs0rnacw92v9fym",
+      "mdsvs0rs1gbmv102z01",
+      "mdsvs0ru3hns5i6ptgd",
+      "mdsvs0rwf0ftvbks8mq",
+      "mdsvs0s28o7gtov9c9o",
+      "mdsvs0s7bhrh0iywg66",
+      "mdsvs0scvc7co1hx0dd",
+      "mdsvs0seqzchhedo7",
+      "mdsvs0sfmllpm91301"
+    ],
+    "isSystem": true,
+    "id": "mdsvs0shi4smj7ykgh",
+    "createdAt": "2025-08-01T13:50:08.897Z",
+    "updatedAt": "2025-08-01T13:50:08.897Z"
+  },
+  {
+    "name": "manager",
+    "description": "Project manager with project management permissions",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r0lg0r01sr59r",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0r94ldgl6nmw05",
+      "mdsvs0rdwfl54ypnc3",
+      "mdsvs0rfnd0x0xmuqlb",
+      "mdsvs0rnacw92v9fym"
+    ],
+    "isSystem": true,
+    "id": "mdsvs0siowp3fvsm6i",
+    "createdAt": "2025-08-01T13:50:08.898Z",
+    "updatedAt": "2025-08-01T13:50:08.898Z"
+  },
+  {
+    "name": "user",
+    "description": "Regular user with basic permissions",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0r94ldgl6nmw05"
+    ],
+    "isSystem": true,
+    "id": "mdsvs0skbcqbxhv87o",
+    "createdAt": "2025-08-01T13:50:08.900Z",
+    "updatedAt": "2025-08-01T13:50:08.900Z"
+  },
+  {
+    "name": "plant_head",
+    "description": "Plant Head with production planning and approval permissions",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r0lg0r01sr59r",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0rwf0ftvbks8mq",
+      "mdsvs0s28o7gtov9c9o",
+      "mdsvs0s7bhrh0iywg66",
+      "mdsvs0scvc7co1hx0dd",
+      "mdsvs0seqzchhedo7",
+      "mdsvs0sfmllpm91301"
+    ],
+    "isSystem": true,
+    "id": "mdsvs0slz4dazf7jn7",
+    "createdAt": "2025-08-01T13:50:08.901Z",
+    "updatedAt": "2025-08-01T13:50:08.901Z"
+  },
+  {
+    "name": "production_manager",
+    "description": "Production Manager with production planning permissions",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0rwf0ftvbks8mq",
+      "mdsvs0s28o7gtov9c9o",
+      "mdsvs0s7bhrh0iywg66",
+      "mdsvs0scvc7co1hx0dd"
+    ],
+    "isSystem": true,
+    "id": "mdsvs0sm4g2ebejicna",
+    "createdAt": "2025-08-01T13:50:08.902Z",
+    "updatedAt": "2025-08-01T13:50:08.902Z"
+  },
+  {
+    "name": "director",
+    "description": "Director with open access to everything",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r0lg0r01sr59r",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0r94ldgl6nmw05",
+      "mdsvs0rdwfl54ypnc3",
+      "mdsvs0rfnd0x0xmuqlb",
+      "mdsvs0rnacw92v9fym",
+      "mdsvs0rs1gbmv102z01",
+      "mdsvs0ru3hns5i6ptgd",
+      "mdsvs0rwf0ftvbks8mq",
+      "mdsvs0s28o7gtov9c9o",
+      "mdsvs0s7bhrh0iywg66",
+      "mdsvs0scvc7co1hx0dd",
+      "mdsvs0seqzchhedo7",
+      "mdsvs0sfmllpm91301"
+    ],
+    "isSystem": true,
+    "id": "mdsvvhw3oxmwiwm8uca",
+    "createdAt": "2025-08-01T13:52:51.027Z",
+    "updatedAt": "2025-08-01T13:52:51.027Z"
+  },
+  {
+    "name": "cto",
+    "description": "CTO with open access to everything",
+    "permissions": [
+      "mdsvs0qn00o7geji4bq",
+      "mdsvs0qx1uf7ttzj3sn",
+      "mdsvs0r0lg0r01sr59r",
+      "mdsvs0r2xsg97886uy8",
+      "mdsvs0r94ldgl6nmw05",
+      "mdsvs0rdwfl54ypnc3",
+      "mdsvs0rfnd0x0xmuqlb",
+      "mdsvs0rnacw92v9fym",
+      "mdsvs0rs1gbmv102z01",
+      "mdsvs0ru3hns5i6ptgd",
+      "mdsvs0rwf0ftvbks8mq",
+      "mdsvs0s28o7gtov9c9o",
+      "mdsvs0s7bhrh0iywg66",
+      "mdsvs0scvc7co1hx0dd",
+      "mdsvs0seqzchhedo7",
+      "mdsvs0sfmllpm91301"
+    ],
+    "isSystem": true,
+    "id": "mdsvvhw7rgh3emgf7jf",
+    "createdAt": "2025-08-01T13:52:51.031Z",
+    "updatedAt": "2025-08-01T13:52:51.031Z"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "175423781476112ijzir2p",
+    "title": "Monthly Production Plan - September 2025",
+    "month": 9,
+    "year": 2025,
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "deadline": "2025-09-27T18:30:00.000Z",
+    "createdAt": "2025-08-03T16:16:54.782Z",
+    "updatedAt": "2025-08-03T16:17:54.755Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "id": "1754237874754bxu9ywu9f"
+      }
+    ],
+    "weekCount": 5,
+    "submittedAt": "2025-08-03T16:17:54.754Z"
+  }
+]

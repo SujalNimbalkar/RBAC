@@ -1,0 +1,249 @@
+/* Sidebar Styles */
+.dashboard-sidebar {
+  width: 280px;
+  background: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #34495e;
+}
+
+.logo-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.nav-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #bdc3c7;
+  margin: 0 20px 10px 20px;
+  letter-spacing: 0.5px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  color: #ecf0f1;
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #34495e;
+  color: white;
+}
+
+.nav-link.active {
+  background: #667eea;
+  color: white;
+}
+
+.nav-icon {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.color-dot.blue { background: #3498db; }
+.color-dot.yellow { background: #f1c40f; }
+.color-dot.red { background: #e74c3c; }
+.color-dot.orange { background: #e67e22; }
+.color-dot.purple { background: #9b59b6; }
+
+.lock-icon {
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+.show-more-btn {
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  font-size: 0.8rem;
+  padding: 5px 20px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.show-more-btn:hover {
+  color: white;
+}
+
+.team-section {
+  margin-top: 10px;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.team-avatars {
+  display: flex;
+  gap: 2px;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  background: #667eea;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.team-name {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.add-btn {
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover {
+  color: white;
+}
+
+.team-projects {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.sidebar-collapse {
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2c3e50;
+  border: 2px solid #34495e;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.sidebar-collapse:hover {
+  background: #34495e;
+}
+
+/* Responsive Design for Sidebar */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 100%;
+    min-height: auto;
+    order: 2;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+
+  .nav-section {
+    margin-bottom: 0;
+    margin-right: 20px;
+    min-width: 200px;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+} 

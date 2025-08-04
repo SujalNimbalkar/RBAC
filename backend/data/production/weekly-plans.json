@@ -1,0 +1,139 @@
+[
+  {
+    "id": "1754237874757nn5sy13cl",
+    "title": "Weekly Production Plan - Week 1 (1-7) - September 2025",
+    "weekNumber": 1,
+    "weekStartDate": "2025-09-01T00:00:00.000Z",
+    "weekEndDate": "2025-09-07T00:00:00.000Z",
+    "month": 9,
+    "year": 2025,
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "monthlyPlanId": "175423781476112ijzir2p",
+    "createdAt": "2025-08-03T16:17:54.757Z",
+    "updatedAt": "2025-08-03T16:18:26.002Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "weeklyQuantities": {
+          "week1-7": 999
+        },
+        "id": "1754237906002hpdm06my8"
+      }
+    ],
+    "submittedAt": "2025-08-03T16:18:26.002Z"
+  },
+  {
+    "id": "1754237874757sr8x5xc73",
+    "title": "Weekly Production Plan - Week 2 (8-14) - September 2025",
+    "weekNumber": 2,
+    "weekStartDate": "2025-09-07T00:00:00.000Z",
+    "weekEndDate": "2025-09-13T00:00:00.000Z",
+    "month": 9,
+    "year": 2025,
+    "status": "completed",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "monthlyPlanId": "175423781476112ijzir2p",
+    "createdAt": "2025-08-03T16:17:54.758Z",
+    "updatedAt": "2025-08-03T16:28:20.860Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "weeklyQuantities": {
+          "week8-14": 398
+        },
+        "id": "1754238500859g3rv2soae"
+      }
+    ],
+    "submittedAt": "2025-08-03T16:28:20.859Z"
+  },
+  {
+    "id": "17542378747589vqjtefmh",
+    "title": "Weekly Production Plan - Week 3 (15-21) - September 2025",
+    "weekNumber": 3,
+    "weekStartDate": "2025-09-14T18:30:00.000Z",
+    "weekEndDate": "2025-09-20T18:30:00.000Z",
+    "month": 9,
+    "year": 2025,
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "monthlyPlanId": "175423781476112ijzir2p",
+    "createdAt": "2025-08-03T16:17:54.758Z",
+    "updatedAt": "2025-08-03T16:17:54.758Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "id": "1754237874758olvukozyv",
+        "weeklyQuantities": {
+          "week15-21": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "1754237874758y3hnofj3p",
+    "title": "Weekly Production Plan - Week 4 (22-28) - September 2025",
+    "weekNumber": 4,
+    "weekStartDate": "2025-09-21T18:30:00.000Z",
+    "weekEndDate": "2025-09-27T18:30:00.000Z",
+    "month": 9,
+    "year": 2025,
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "monthlyPlanId": "175423781476112ijzir2p",
+    "createdAt": "2025-08-03T16:17:54.758Z",
+    "updatedAt": "2025-08-03T16:17:54.758Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "id": "1754237874758bcfq16w3j",
+        "weeklyQuantities": {
+          "week22-28": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "175423787475843pq9obiw",
+    "title": "Weekly Production Plan - Week 5 (29-30) - September 2025",
+    "weekNumber": 5,
+    "weekStartDate": "2025-09-28T18:30:00.000Z",
+    "weekEndDate": "2025-10-29T18:30:00.000Z",
+    "month": 9,
+    "year": 2025,
+    "status": "pending",
+    "assignedTo": "2",
+    "assignedRole": "plant_head",
+    "monthlyPlanId": "175423781476112ijzir2p",
+    "createdAt": "2025-08-03T16:17:54.758Z",
+    "updatedAt": "2025-08-03T16:17:54.758Z",
+    "items": [
+      {
+        "itemCode": "SBA064",
+        "itemName": "JCB 24v Siren",
+        "customerName": "JCB",
+        "monthlyQuantity": 4000,
+        "id": "17542378747581vzgmjtk6",
+        "weeklyQuantities": {
+          "week29-30": 0
+        }
+      }
+    ]
+  }
+]

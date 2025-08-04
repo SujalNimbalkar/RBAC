@@ -1,0 +1,51 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "init": "ts-node src/scripts/init.ts",
+    "seed-users": "ts-node src/scripts/seed-users.ts",
+    "automate-production": "ts-node src/scripts/automate-production.ts",
+    "test-automation": "node test-automation.js",
+    "test-weekly": "node test-weekly-creation.js",
+    "test-daily": "node test-daily-creation.js",
+    "test-duplicate-prevention": "node test-duplicate-prevention.js",
+    "test-cron-service": "node test-cron-service.js",
+    "test-monthly-creation": "node test-monthly-creation.js",
+    "create-test-plan": "node create-test-plan.js",
+    "cleanup-duplicates": "node cleanup-duplicates.js",
+    "cleanup-all-production": "node cleanup-all-production.js",
+    "cleanup-mongo-collections": "node cleanup-mongo-collections.js",
+    "generate-token": "ts-node src/scripts/generate-admin-token.ts",
+    "migrate-to-mongo": "ts-node src/scripts/migrateToMongo.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^24.1.0",
+    "@types/pdfkit": "^0.17.2",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "exceljs": "^4.4.0",
+    "express": "^4.17.2",
+    "firebase-admin": "^12.0.0",
+    "mongoose": "^8.17.0",
+    "node-cron": "^4.2.1",
+    "nodemon": "^3.1.10",
+    "pdfkit": "^0.17.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.11"
+  }
+}

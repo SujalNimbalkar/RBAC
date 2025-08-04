@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Create Tasks",
+    "description": "Can create new tasks",
+    "resource": "task",
+    "action": "create",
+    "id": "mdsvs0qn00o7geji4bq",
+    "createdAt": "2025-08-01T13:50:08.831Z",
+    "updatedAt": "2025-08-01T13:50:08.831Z"
+  },
+  {
+    "name": "Update Tasks",
+    "description": "Can update existing tasks",
+    "resource": "task",
+    "action": "update",
+    "id": "mdsvs0qx1uf7ttzj3sn",
+    "createdAt": "2025-08-01T13:50:08.841Z",
+    "updatedAt": "2025-08-01T13:50:08.841Z"
+  },
+  {
+    "name": "Delete Tasks",
+    "description": "Can delete tasks",
+    "resource": "task",
+    "action": "delete",
+    "id": "mdsvs0r0lg0r01sr59r",
+    "createdAt": "2025-08-01T13:50:08.844Z",
+    "updatedAt": "2025-08-01T13:50:08.844Z"
+  },
+  {
+    "name": "Comment on Tasks",
+    "description": "Can add comments to tasks",
+    "resource": "task",
+    "action": "comment",
+    "id": "mdsvs0r2xsg97886uy8",
+    "createdAt": "2025-08-01T13:50:08.846Z",
+    "updatedAt": "2025-08-01T13:50:08.846Z"
+  },
+  {
+    "name": "Create Projects",
+    "description": "Can create new projects",
+    "resource": "project",
+    "action": "create",
+    "id": "mdsvs0r94ldgl6nmw05",
+    "createdAt": "2025-08-01T13:50:08.853Z",
+    "updatedAt": "2025-08-01T13:50:08.853Z"
+  },
+  {
+    "name": "Update Projects",
+    "description": "Can update existing projects",
+    "resource": "project",
+    "action": "update",
+    "id": "mdsvs0rdwfl54ypnc3",
+    "createdAt": "2025-08-01T13:50:08.857Z",
+    "updatedAt": "2025-08-01T13:50:08.857Z"
+  },
+  {
+    "name": "Delete Projects",
+    "description": "Can delete projects",
+    "resource": "project",
+    "action": "delete",
+    "id": "mdsvs0rfnd0x0xmuqlb",
+    "createdAt": "2025-08-01T13:50:08.859Z",
+    "updatedAt": "2025-08-01T13:50:08.859Z"
+  },
+  {
+    "name": "Manage Project Members",
+    "description": "Can add/remove project members",
+    "resource": "project",
+    "action": "manage_members",
+    "id": "mdsvs0rnacw92v9fym",
+    "createdAt": "2025-08-01T13:50:08.867Z",
+    "updatedAt": "2025-08-01T13:50:08.867Z"
+  },
+  {
+    "name": "Manage Users",
+    "description": "Can manage user accounts",
+    "resource": "user",
+    "action": "manage",
+    "id": "mdsvs0rs1gbmv102z01",
+    "createdAt": "2025-08-01T13:50:08.872Z",
+    "updatedAt": "2025-08-01T13:50:08.872Z"
+  },
+  {
+    "name": "Manage Roles",
+    "description": "Can manage roles and permissions",
+    "resource": "role",
+    "action": "manage",
+    "id": "mdsvs0ru3hns5i6ptgd",
+    "createdAt": "2025-08-01T13:50:08.874Z",
+    "updatedAt": "2025-08-01T13:50:08.874Z"
+  },
+  {
+    "name": "Create Production Plans",
+    "description": "Can create production plans",
+    "resource": "production",
+    "action": "create",
+    "id": "mdsvs0rwf0ftvbks8mq",
+    "createdAt": "2025-08-01T13:50:08.876Z",
+    "updatedAt": "2025-08-01T13:50:08.876Z"
+  },
+  {
+    "name": "Read Production Plans",
+    "description": "Can read production plans",
+    "resource": "production",
+    "action": "read",
+    "id": "mdsvs0s28o7gtov9c9o",
+    "createdAt": "2025-08-01T13:50:08.882Z",
+    "updatedAt": "2025-08-01T13:50:08.882Z"
+  },
+  {
+    "name": "Update Production Plans",
+    "description": "Can update production plans",
+    "resource": "production",
+    "action": "update",
+    "id": "mdsvs0s7bhrh0iywg66",
+    "createdAt": "2025-08-01T13:50:08.887Z",
+    "updatedAt": "2025-08-01T13:50:08.887Z"
+  },
+  {
+    "name": "Delete Production Plans",
+    "description": "Can delete production plans",
+    "resource": "production",
+    "action": "delete",
+    "id": "mdsvs0scvc7co1hx0dd",
+    "createdAt": "2025-08-01T13:50:08.892Z",
+    "updatedAt": "2025-08-01T13:50:08.892Z"
+  },
+  {
+    "name": "Approve Production Plans",
+    "description": "Can approve production plans",
+    "resource": "production",
+    "action": "approve",
+    "id": "mdsvs0seqzchhedo7",
+    "createdAt": "2025-08-01T13:50:08.894Z",
+    "updatedAt": "2025-08-01T13:50:08.894Z"
+  },
+  {
+    "name": "Reject Production Plans",
+    "description": "Can reject production plans",
+    "resource": "production",
+    "action": "reject",
+    "id": "mdsvs0sfmllpm91301",
+    "createdAt": "2025-08-01T13:50:08.895Z",
+    "updatedAt": "2025-08-01T13:50:08.895Z"
+  }
+]

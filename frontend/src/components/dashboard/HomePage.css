@@ -1,0 +1,262 @@
+/* Home Page Styles */
+.home-container {
+  padding: 30px;
+}
+
+.tasks-due-soon {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.see-all-link {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.see-all-link:hover {
+  text-decoration: underline;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.task-label {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.task-label.orange { background: #e67e22; }
+.task-label.purple { background: #9b59b6; }
+
+.task-due {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.favorites-grid {
+  margin-bottom: 30px;
+}
+
+.favorites-grid h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.favorites-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.favorite-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid;
+}
+
+.favorite-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-card.blue { border-left-color: #3498db; }
+.favorite-card.yellow { border-left-color: #f1c40f; }
+.favorite-card.red { border-left-color: #e74c3c; }
+.favorite-card.orange { border-left-color: #e67e22; }
+.favorite-card.pink { border-left-color: #e91e63; }
+
+.card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-content h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.favorites-grid {
+  margin-bottom: 30px;
+}
+
+.favorites-grid h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.favorites-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.favorite-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid;
+}
+
+.favorite-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-card.blue { border-left-color: #3498db; }
+.favorite-card.yellow { border-left-color: #f1c40f; }
+.favorite-card.red { border-left-color: #e74c3c; }
+.favorite-card.orange { border-left-color: #e67e22; }
+.favorite-card.pink { border-left-color: #e91e63; }
+
+.card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-content h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.recent-projects {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-projects h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-name {
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-avatars {
+  display: flex;
+  gap: 2px;
+}
+
+.project-count {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Responsive Design for HomePage */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 20px;
+  }
+
+  .favorites-cards {
+    grid-template-columns: 1fr;
+  }
+} 
