@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node --max-old-space-size=4096 dist/server.js",
-    "dev": "nodemon --max-old-space-size=4096 src/server.ts",
+    "start": "node dist/server.js",
+    "start:prod": "NODE_OPTIONS='--max-old-space-size=2048' node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
     "test": "jest",
     "init": "ts-node src/scripts/init.ts",
