@@ -17,6 +17,13 @@ Parameters:
       - t3.large
     Description: EC2 instance type
 
+  NodePort:
+    Type: Number
+    Default: 3000
+    Description: Port for Node.js application
+    MinValue: 1024
+    MaxValue: 65535
+
 Resources:
   # VPC and Networking
   VPC:
@@ -94,10 +101,10 @@ Resources:
           FromPort: 443
           ToPort: 443
           CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 3000
-          ToPort: 3000
-          CidrIp: 0.0.0.0/0
+                 - IpProtocol: tcp
+           FromPort: !Ref NodePort
+           ToPort: !Ref NodePort
+           CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
         - IpProtocol: -1
           CidrIp: 0.0.0.0/0
@@ -146,7 +153,9 @@ Resources:
           FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.com
           JWT_SECRET=your-jwt-secret-key-here
           NODE_ENV=production
-          PORT=3000
+          PORT=${NodePort}
+          NODE_PORT=${NodePort}
+          NGINX_PORT=80
           TZ=Asia/Kolkata
           ENVEOF
           
@@ -160,7 +169,7 @@ Resources:
               exec_mode: 'cluster',
               env: {
                 NODE_ENV: 'production',
-                PORT: 3000
+                PORT: ${NodePort}
               },
               env_file: '.env'
             }]
@@ -184,7 +193,7 @@ Resources:
               server_name _;
               
               location /api/ {
-                  proxy_pass http://localhost:3000;
+                  proxy_pass http://localhost:${NodePort};
                   proxy_http_version 1.1;
                   proxy_set_header Upgrade \$http_upgrade;
                   proxy_set_header Connection 'upgrade';
@@ -216,6 +225,7 @@ Resources:
           systemctl enable firewalld
           firewall-cmd --permanent --add-service=http
           firewall-cmd --permanent --add-service=https
+          firewall-cmd --permanent --add-port=${NodePort}/tcp
           firewall-cmd --reload
       Tags:
         - Key: Name

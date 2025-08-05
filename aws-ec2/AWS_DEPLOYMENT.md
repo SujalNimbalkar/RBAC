@@ -9,6 +9,21 @@ This guide will help you deploy your RBAC3 Production Planning System to AWS EC2
 3. **SSH Key Pair**: Create an EC2 key pair
 4. **Node.js**: Version 16 or higher (for local builds)
 
+## 🔧 Why Configurable Ports?
+
+The deployment configuration now uses **configurable ports** instead of hardcoded values. This is important because:
+
+- **Flexibility**: You can change ports without modifying scripts
+- **Security**: Avoid port conflicts in shared environments
+- **Compliance**: Meet organizational port requirements
+- **Scalability**: Easy to deploy multiple instances on different ports
+- **Maintenance**: Update configurations without code changes
+
+### Default Ports:
+- **Node.js Application**: 3000 (configurable via `NODE_PORT`)
+- **Nginx HTTP**: 80 (configurable via `NGINX_PORT`)
+- **Nginx HTTPS**: 443 (configurable via `NGINX_SSL_PORT`)
+
 ## 🔧 Setup Steps
 
 ### 1. Install AWS CLI
@@ -50,11 +65,13 @@ Enter your:
 #### Option A: Using CloudFormation (Recommended)
 
 ```bash
-# Deploy the CloudFormation stack
+# Deploy the CloudFormation stack with configurable ports
 aws cloudformation create-stack \
   --stack-name rbac3-production \
   --template-body file://aws-ec2/cloudformation-template.yaml \
-  --parameters ParameterKey=KeyPairName,ParameterValue=your-key-pair-name \
+  --parameters \
+    ParameterKey=KeyPairName,ParameterValue=your-key-pair-name \
+    ParameterKey=NodePort,ParameterValue=3000 \
   --capabilities CAPABILITY_NAMED_IAM
 
 # Wait for stack creation
@@ -79,16 +96,59 @@ ssh -i your-key.pem ec2-user@your-instance-public-ip
 
 3. **Run Setup Script:**
 ```bash
-# Upload setup script
-scp -i your-key.pem aws-ec2/setup-ec2.sh ec2-user@your-instance-public-ip:~/
+# Upload setup script and configuration
+scp -i your-key.pem aws-ec2/setup-configurable.sh ec2-user@your-instance-public-ip:~/
+scp -i your-key.pem aws-ec2/config.env ec2-user@your-instance-public-ip:~/
 
 # Run setup
 ssh -i your-key.pem ec2-user@your-instance-public-ip
-chmod +x setup-ec2.sh
-./setup-ec2.sh
+chmod +x setup-configurable.sh
+cp config.env .env
+# Edit .env with your actual values
+nano .env
+./setup-configurable.sh
 ```
 
 ### 5. Configure Environment Variables
+
+#### Option A: Using Configuration File (Recommended)
+
+Copy the configuration template and customize it:
+
+```bash
+cp aws-ec2/config.env .env
+nano .env
+```
+
+Update the configuration with your values:
+```env
+# Application Ports (Configurable)
+NODE_PORT=3000
+NGINX_PORT=80
+NGINX_SSL_PORT=443
+
+# Database Configuration
+MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/your-database
+
+# Firebase Configuration
+FIREBASE_PROJECT_ID=your-firebase-project-id
+FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.com
+
+# JWT Configuration
+JWT_SECRET=your-jwt-secret-key-here
+
+# App Configuration
+NODE_ENV=production
+PORT=${NODE_PORT}
+TZ=Asia/Kolkata
+
+# AWS Configuration
+AWS_REGION=us-east-1
+AWS_INSTANCE_TYPE=t3.small
+```
+
+#### Option B: Manual Configuration
 
 Edit the `.env` file on your EC2 instance:
 
@@ -105,6 +165,8 @@ FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.c
 JWT_SECRET=your-jwt-secret-key-here
 NODE_ENV=production
 PORT=3000
+NODE_PORT=3000
+NGINX_PORT=80
 TZ=Asia/Kolkata
 ```
 

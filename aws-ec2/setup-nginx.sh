@@ -15,7 +15,7 @@ sudo systemctl start firewalld
 sudo systemctl enable firewalld
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --permanent --add-port=3000/tcp
+sudo firewall-cmd --permanent --add-port=\${NODE_PORT:-3000}/tcp
 sudo firewall-cmd --reload
 
 # Copy Nginx configuration
