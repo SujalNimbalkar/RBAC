@@ -32,7 +32,8 @@ cd backend && npm install && npm run build && cd ..
 # Create environment file
 cat > .env << EOF
 # MongoDB Configuration
-MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/your-database
+MONGODB_URI=mongodb+srv://sujalnimbalkar09:qeAqqWtfhOGtaCeZ@cluster0.ftdcnyq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
 
 # Firebase Configuration
 FIREBASE_PROJECT_ID=your-firebase-project-id
@@ -40,7 +41,7 @@ FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----EN
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project.iam.gserviceaccount.com
 
 # JWT Configuration
-JWT_SECRET=your-jwt-secret-key-here
+JWT_SECRET=27081b784b9b2716d9ebe34ffa1cb098a23a5b8c1e384184655554ac24f1b7ac1d3e97a369670746a37a7416964f75603d69efc80f1236a0e76df0e2dc9e5c01
 
 # App Configuration
 NODE_ENV=production

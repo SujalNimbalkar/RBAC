@@ -278,7 +278,7 @@ router.post('/monthly', verifyToken, hasPermission('production', 'create'), asyn
       submittedAt: new Date().toISOString()
     });
     
-          // Create task for the plan
+    // Create task for the plan
       await MongoProductionTaskService.create({
         id: generateId(),
         type: 'monthly',
@@ -386,9 +386,9 @@ router.post('/monthly/:id/submit', async (req: Request, res: Response) => {
         
         // Check if task already exists for this weekly plan
         const existingTasks = await MongoProductionTaskService.findByType('weekly');
-        const existingTask = existingTasks.find(t => t.planId === weeklyPlan.id);
+      const existingTask = existingTasks.find(t => t.planId === weeklyPlan.id);
         
-        if (!existingTask) {
+      if (!existingTask) {
           // Create task for this weekly plan
           await MongoProductionTaskService.create({
             id: generateId(),
@@ -881,10 +881,10 @@ router.post('/daily/:id/approve', async (req: Request, res: Response) => {
       
       if (existingReportTask) {
         console.log('Report task already exists for this daily plan:', existingReportTask.id);
-        res.json({
-          success: true,
-          data: {
-            plan,
+    res.json({
+      success: true,
+      data: {
+        plan,
             existingReportTask
           }
         });
@@ -1272,10 +1272,10 @@ router.delete('/tasks/:id', async (req: Request, res: Response) => {
   try {
     const deleted = await MongoProductionTaskService.deleteById(req.params.id);
     if (deleted) {
-      res.json({
-        success: true,
-        message: 'Task deleted successfully'
-      });
+    res.json({
+      success: true,
+      message: 'Task deleted successfully'
+    });
     } else {
       res.status(404).json({
         success: false,

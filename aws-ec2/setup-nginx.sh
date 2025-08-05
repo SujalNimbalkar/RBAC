@@ -4,29 +4,27 @@ echo "🔧 Setting up Nginx reverse proxy..."
 
 # Install Nginx
 sudo yum install -y nginx
-
-# Start and enable Nginx
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
-# Configure firewall
+# Install and configure firewall
 sudo yum install -y firewalld
 sudo systemctl start firewalld
 sudo systemctl enable firewalld
+
+# Allow HTTP, HTTPS, and Node.js app port
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --permanent --add-port=\${NODE_PORT:-3000}/tcp
+sudo firewall-cmd --permanent --add-port=3000/tcp
 sudo firewall-cmd --reload
 
-# Copy Nginx configuration
-sudo cp nginx.conf /etc/nginx/conf.d/rbac3.conf
+# Copy the simple Nginx configuration
+sudo cp aws-ec2/nginx-simple.conf /etc/nginx/conf.d/rbac3.conf
 
-# Test Nginx configuration
+# Test and reload Nginx
 sudo nginx -t
-
-# Reload Nginx
 sudo systemctl reload nginx
 
 echo "✅ Nginx setup completed!"
-echo "🌐 Nginx is now serving your application"
+echo "🌐 Nginx is now serving your application on port 80"
 echo "📋 Check status with: sudo systemctl status nginx" 

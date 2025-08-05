@@ -20,6 +20,7 @@ The deployment configuration now uses **configurable ports** instead of hardcode
 - **Maintenance**: Update configurations without code changes
 
 ### Default Ports:
+
 - **Node.js Application**: 3000 (configurable via `NODE_PORT`)
 - **Nginx HTTP**: 80 (configurable via `NGINX_PORT`)
 - **Nginx HTTPS**: 443 (configurable via `NGINX_SSL_PORT`)
@@ -29,12 +30,14 @@ The deployment configuration now uses **configurable ports** instead of hardcode
 ### 1. Install AWS CLI
 
 **Windows:**
+
 ```bash
 # Download and install from:
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 ```
 
 **macOS/Linux:**
+
 ```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -48,6 +51,7 @@ aws configure
 ```
 
 Enter your:
+
 - AWS Access Key ID
 - AWS Secret Access Key
 - Default region (e.g., us-east-1)
@@ -84,17 +88,20 @@ aws cloudformation describe-stacks --stack-name rbac3-production --query 'Stacks
 #### Option B: Manual EC2 Setup
 
 1. **Launch EC2 Instance:**
+
    - AMI: Amazon Linux 2
    - Instance Type: t3.small (or larger)
    - Security Group: Allow ports 22, 80, 443, 3000
    - Key Pair: Your created key pair
 
 2. **Connect to Instance:**
+
 ```bash
 ssh -i your-key.pem ec2-user@your-instance-public-ip
 ```
 
 3. **Run Setup Script:**
+
 ```bash
 # Upload setup script and configuration
 scp -i your-key.pem aws-ec2/setup-configurable.sh ec2-user@your-instance-public-ip:~/
@@ -121,6 +128,7 @@ nano .env
 ```
 
 Update the configuration with your values:
+
 ```env
 # Application Ports (Configurable)
 NODE_PORT=3000
@@ -157,6 +165,7 @@ sudo nano /var/www/rbac3/.env
 ```
 
 Replace with your actual values:
+
 ```env
 MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/your-database
 FIREBASE_PROJECT_ID=your-firebase-project-id
@@ -206,6 +215,7 @@ pm2 restart rbac3-production-planning
 ## 🌐 Access Your Application
 
 After deployment, your app will be available at:
+
 ```
 http://your-ec2-public-ip
 ```
@@ -213,6 +223,7 @@ http://your-ec2-public-ip
 ## 📊 Monitoring
 
 ### PM2 Commands
+
 ```bash
 # Check status
 pm2 status
@@ -228,6 +239,7 @@ pm2 restart rbac3-production-planning
 ```
 
 ### Nginx Commands
+
 ```bash
 # Check status
 sudo systemctl status nginx
@@ -243,16 +255,19 @@ sudo nginx -t && sudo systemctl reload nginx
 ## 🔧 Environment Variables Setup
 
 ### MongoDB Atlas
+
 1. Create a MongoDB Atlas cluster
 2. Get your connection string
 3. Add it to the `.env` file
 
 ### Firebase
+
 1. Create a Firebase project
 2. Generate a service account key
 3. Add the credentials to the `.env` file
 
 ### JWT Secret
+
 Generate a secure random string for JWT_SECRET
 
 ## 🛠️ Troubleshooting
@@ -260,11 +275,13 @@ Generate a secure random string for JWT_SECRET
 ### Common Issues
 
 1. **Application Not Starting**
+
    - Check PM2 logs: `pm2 logs`
    - Verify environment variables: `cat .env`
    - Check Node.js installation: `node --version`
 
 2. **Nginx Not Serving**
+
    - Check Nginx status: `sudo systemctl status nginx`
    - Test configuration: `sudo nginx -t`
    - Check error logs: `sudo tail -f /var/log/nginx/error.log`
@@ -302,9 +319,11 @@ sudo tail -f /var/log/nginx/access.log
 ## 📈 Scaling
 
 ### Vertical Scaling
+
 - Upgrade instance type (t3.small → t3.medium → t3.large)
 
 ### Horizontal Scaling
+
 - Use Application Load Balancer
 - Deploy multiple instances
 - Use Auto Scaling Group
@@ -312,6 +331,7 @@ sudo tail -f /var/log/nginx/access.log
 ## 🔄 Continuous Deployment
 
 For automatic deployments, consider:
+
 1. GitHub Actions
 2. AWS CodePipeline
 3. Jenkins
@@ -320,6 +340,7 @@ For automatic deployments, consider:
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check the [AWS EC2 documentation](https://docs.aws.amazon.com/ec2/)
 2. Review the [PM2 documentation](https://pm2.keymetrics.io/docs/)
-3. Check the application logs for specific error messages 
+3. Check the application logs for specific error messages
