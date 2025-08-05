@@ -16,7 +16,14 @@ import rbacRoutes from './routes/rbac';
 import productionRoutes from './routes/production';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
+
+// Log environment variables for debugging
+console.log('🔧 Environment Configuration:');
+console.log(`   PORT: ${process.env.PORT || 'not set (using 3000)'}`);
+console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+console.log(`   MONGODB_URI: ${process.env.MONGODB_URI ? 'set' : 'not set'}`);
+console.log(`   FIREBASE_PROJECT_ID: ${process.env.FIREBASE_PROJECT_ID ? 'set' : 'not set'}`);
 
 // Middleware
 app.use(cors({
@@ -37,7 +44,9 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    port: PORT,
+    message: 'Server is running and healthy'
   });
 });
 
@@ -78,6 +87,7 @@ app.get('/', (req, res) => {
   res.json({ 
     message: 'Welcome to RBAC3 Backend API',
     version: '1.0.0',
+    port: PORT,
     endpoints: {
       auth: '/api/auth',
       tasks: '/api/tasks',
@@ -130,14 +140,22 @@ app.use((error: any, req: express.Request, res: express.Response, next: express.
 // Start server
 const startServer = async () => {
   try {
+    console.log('🚀 Starting RBAC3 Backend Server...');
+    console.log(`📋 Configuration:`);
+    console.log(`   - Port: ${PORT}`);
+    console.log(`   - Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`   - Database: MongoDB Atlas`);
+    
     // Connect to MongoDB Atlas
     await connectDB();
+    console.log('✅ MongoDB Atlas connected successfully');
     
     // Initialize cron service
     CronService.initialize();
+    console.log('✅ Cron service initialized with automated production plans');
     
-    app.listen(PORT, () => {
-      console.log(`🚀 Server is running on port ${PORT}`);
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🎉 Server is running on port ${PORT}`);
       console.log(`📊 Health check available at http://localhost:${PORT}/api/health`);
       console.log(`🔗 API Documentation available at http://localhost:${PORT}/`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
