@@ -127,17 +127,6 @@ app.use((error: any, req: express.Request, res: express.Response, next: express.
   });
 });
 
-// Memory management
-const logMemoryUsage = () => {
-  const memUsage = process.memoryUsage();
-  console.log('📊 Memory Usage:', {
-    rss: `${Math.round(memUsage.rss / 1024 / 1024)} MB`,
-    heapTotal: `${Math.round(memUsage.heapTotal / 1024 / 1024)} MB`,
-    heapUsed: `${Math.round(memUsage.heapUsed / 1024 / 1024)} MB`,
-    external: `${Math.round(memUsage.external / 1024 / 1024)} MB`
-  });
-};
-
 // Start server
 const startServer = async () => {
   try {
@@ -154,12 +143,6 @@ const startServer = async () => {
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🗄️  Database: MongoDB Atlas`);
       console.log(`🕐 Cron service initialized with automated production plans`);
-      
-      // Log initial memory usage
-      logMemoryUsage();
-      
-      // Log memory usage every 5 minutes
-      setInterval(logMemoryUsage, 5 * 60 * 1000);
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error);
