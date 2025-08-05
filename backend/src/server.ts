@@ -16,7 +16,7 @@ import rbacRoutes from './routes/rbac';
 import productionRoutes from './routes/production';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Log environment variables for debugging
 console.log('🔧 Environment Configuration:');
