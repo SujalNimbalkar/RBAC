@@ -20,7 +20,7 @@ if %errorlevel% neq 0 (
 )
 
 REM Set the project ID (replace with your actual project ID)
-set PROJECT_ID=your-google-cloud-project-id
+set PROJECT_ID=rbac-bef5f
 echo 📋 Using project: %PROJECT_ID%
 
 REM Set the project

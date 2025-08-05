@@ -17,7 +17,7 @@ if ! gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q
 fi
 
 # Set the project ID (replace with your actual project ID)
-PROJECT_ID="your-google-cloud-project-id"
+PROJECT_ID="rbac-bef5f"
 echo "📋 Using project: $PROJECT_ID"
 
 # Set the project
