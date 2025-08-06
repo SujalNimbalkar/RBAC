@@ -44,7 +44,16 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string, task?: ProductionTask) => {
+    // Handle special status displays for daily plans
+    if (task?.type === 'daily' && status === 'inProgress') {
+      if (canApprove()) {
+        return '#ffc107'; // Amber/Yellow for "Pending Approval"
+      } else if (isProductionManager()) {
+        return '#fd7e14'; // Orange for "Waiting for Approval"
+      }
+    }
+    
     switch (status) {
       case 'completed': return '#28a745';
       case 'inProgress': return '#007bff';
@@ -55,9 +64,13 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
   };
 
   const getStatusDisplay = (task: ProductionTask) => {
-    // For daily plans that are inProgress and can be approved, show "Pending Approval"
-    if (task.type === 'daily' && task.status === 'inProgress' && canApprove()) {
-      return 'Pending Approval';
+    // For daily plans that are inProgress, show different status based on user role
+    if (task.type === 'daily' && task.status === 'inProgress') {
+      if (canApprove()) {
+        return 'Pending Approval';
+      } else if (isProductionManager()) {
+        return 'Waiting for Approval';
+      }
     }
     return task.status;
   };
@@ -255,7 +268,10 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
               </div>
               
               <div className="task-meta">
-                <div className="task-status" style={{ backgroundColor: getStatusColor(task.status) }}>
+                <div className={`task-status ${
+                  task.type === 'daily' && task.status === 'inProgress' && canApprove() ? 'pending-approval' : 
+                  task.type === 'daily' && task.status === 'inProgress' && isProductionManager() ? 'waiting-approval' : ''
+                }`} style={task.type === 'daily' && task.status === 'inProgress' ? {} : { backgroundColor: getStatusColor(task.status, task) }}>
                   {getStatusDisplay(task)}
                 </div>
                 <div className="task-assignee">

@@ -3,7 +3,7 @@ import { buildApiUrl } from '../../config/api';
 import { useAuth } from '../../contexts/AuthContext';
 import './ProductionPlanModal.css';
 import DailyPlanApprovalModal from './DailyPlanApprovalModal';
-import { canApproveDailyPlans } from '../../utils/roleUtils';
+import { canApproveDailyPlans, canSubmitDailyPlans } from '../../utils/roleUtils';
 
 interface ProductionTask {
   id: string;
@@ -391,6 +391,11 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
     return canApproveDailyPlans(currentUser?.email || undefined, currentUser?.uid || undefined);
   };
 
+  // Check if user is production manager
+  const isProductionManager = () => {
+    return canSubmitDailyPlans(currentUser?.email || undefined, currentUser?.uid || undefined);
+  };
+
   const handleViewForApproval = async () => {
     if (!task) return;
     
@@ -427,12 +432,17 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
     setShowApprovalModal(false);
     setPlanData(null);
     
-    // Show success message
-    if (approved) {
-      alert('Daily plan approved successfully! Daily production report task has been created.');
-    } else {
-      alert(`Daily plan rejected. Reason: ${reason}`);
-    }
+    // Close the main modal after approval/rejection
+    onClose();
+    
+    // Show success message after modal closes
+    setTimeout(() => {
+      if (approved) {
+        alert('Daily plan approved successfully! Daily production report task has been created.');
+      } else {
+        alert(`Daily plan rejected. Reason: ${reason}`);
+      }
+    }, 200);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -1157,8 +1167,14 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
               <div className="status-badge pending">⏳ Pending</div>
             )}
             {task.status === 'inProgress' && (
-              <div className="status-badge in-progress">
-                {task.type === 'daily' && canApprove() ? '⏳ Pending Approval' : '🔄 In Progress'}
+              <div className={`status-badge ${
+                task.type === 'daily' && canApprove() ? 'pending-approval' : 
+                task.type === 'daily' && isProductionManager() ? 'waiting-approval' : 
+                'in-progress'
+              }`}>
+                {task.type === 'daily' && canApprove() ? 'Pending Approval' : 
+                 task.type === 'daily' && isProductionManager() ? 'Waiting for Approval' : 
+                 '🔄 In Progress'}
               </div>
             )}
           </div>

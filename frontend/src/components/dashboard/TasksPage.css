@@ -115,6 +115,16 @@
   letter-spacing: 0.5px;
 }
 
+.task-status.pending-approval {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.task-status.waiting-approval {
+  background-color: #fd7e14 !important;
+  color: white !important;
+}
+
 .task-assignee {
   display: flex;
   align-items: center;
