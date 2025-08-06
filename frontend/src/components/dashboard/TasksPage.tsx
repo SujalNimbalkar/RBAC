@@ -36,20 +36,20 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
 
   const getPriorityColor = (type: string) => {
     switch (type) {
-      case 'monthly': return '#ff4757';
-      case 'weekly': return '#ff6b6b';
-      case 'daily': return '#ffa502';
-      case 'report': return '#5352ed';
+      case 'monthly': return '#6c757d';
+      case 'weekly': return '#6c757d';
+      case 'daily': return '#6c757d';
+      case 'report': return '#6c757d';
       default: return '#747d8c';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return '#2ed573';
-      case 'inProgress': return '#3742fa';
-      case 'rejected': return '#ff4757';
-      case 'pending': return '#747d8c';
+      case 'completed': return '#28a745';
+      case 'inProgress': return '#007bff';
+      case 'rejected': return '#6c757d';
+      case 'pending': return '#6c757d';
       default: return '#747d8c';
     }
   };
@@ -278,7 +278,7 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
                     }}
                     title="Download PDF"
                   >
-                    📄 PDF
+                    PDF
                   </button>
                   <button 
                     className="download-btn excel"
@@ -288,7 +288,7 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
                     }}
                     title="Download Excel"
                   >
-                    📊 Excel
+                    Excel
                   </button>
                 </div>
               </div>

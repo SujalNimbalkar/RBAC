@@ -41,28 +41,48 @@ export class MongoDailyReportService {
       }
 
       // Process entries with proper structure and IDs
-      const processedEntries = reportData.entries?.map((entry: any) => ({
-        id: entry.id || generateId(),
-        deptName: entry.deptName || '',
-        operatorName: entry.operatorName || '',
-        work: entry.work || '',
-        h1Plan: entry.h1Plan || 0,
-        h2Plan: entry.h2Plan || 0,
-        otPlan: entry.otPlan || 0,
-        target: entry.target || 0,
-        h1Actual: entry.h1Actual || 0,
-        h2Actual: entry.h2Actual || 0,
-        otActual: entry.otActual || 0,
-        actualProduction: entry.actualProduction || 0,
-        qualityDefect: entry.qualityDefect || 0,
-        productionPercentage: entry.actualProduction && entry.target 
+      const processedEntries = reportData.entries?.map((entry: any) => {
+        const productionPercentage = entry.actualProduction && entry.target 
           ? (entry.actualProduction / entry.target) * 100 
-          : 0,
-        reason: entry.reason || '',
-        correctiveActions: entry.correctiveActions || '',
-        responsiblePerson: entry.responsiblePerson || '',
-        targetCompletionDate: entry.targetCompletionDate || ''
-      })) || [];
+          : 0;
+
+        // Validate action plan fields for entries with production < 85%
+        if (productionPercentage < 85 && productionPercentage > 0) {
+          if (!entry.reason || entry.reason.trim() === '') {
+            throw new Error(`Reason for low production is mandatory when production is below 85% (current: ${productionPercentage.toFixed(1)}%)`);
+          }
+          if (!entry.correctiveActions || entry.correctiveActions.trim() === '') {
+            throw new Error(`Corrective actions are mandatory when production is below 85% (current: ${productionPercentage.toFixed(1)}%)`);
+          }
+          if (!entry.responsiblePerson || entry.responsiblePerson.trim() === '') {
+            throw new Error(`Responsible person is mandatory when production is below 85% (current: ${productionPercentage.toFixed(1)}%)`);
+          }
+          if (!entry.targetCompletionDate || entry.targetCompletionDate.trim() === '') {
+            throw new Error(`Target completion date is mandatory when production is below 85% (current: ${productionPercentage.toFixed(1)}%)`);
+          }
+        }
+
+        return {
+          id: entry.id || generateId(),
+          deptName: entry.deptName || '',
+          operatorName: entry.operatorName || '',
+          work: entry.work || '',
+          h1Plan: entry.h1Plan || 0,
+          h2Plan: entry.h2Plan || 0,
+          otPlan: entry.otPlan || 0,
+          target: entry.target || 0,
+          h1Actual: entry.h1Actual || 0,
+          h2Actual: entry.h2Actual || 0,
+          otActual: entry.otActual || 0,
+          actualProduction: entry.actualProduction || 0,
+          qualityDefect: entry.qualityDefect || 0,
+          productionPercentage: productionPercentage,
+          reason: entry.reason || '',
+          correctiveActions: entry.correctiveActions || '',
+          responsiblePerson: entry.responsiblePerson || '',
+          targetCompletionDate: entry.targetCompletionDate || ''
+        };
+      }) || [];
 
       // Only update the fields that should be updated
       const updateData: any = {

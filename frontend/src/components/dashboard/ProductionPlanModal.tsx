@@ -136,17 +136,24 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                 
                 // Initialize form data with merged data
                 setFormData({
-                  entries: mergedData.entries?.map((entry: any) => ({
-                    h1Actual: entry.h1Actual || 0,
-                    h2Actual: entry.h2Actual || 0,
-                    otActual: entry.otActual || 0,
-                    actualProduction: entry.actualProduction || 0,
-                    qualityDefects: entry.qualityDefects || 0,
-                    reason: entry.reason || '',
-                    correctiveActions: entry.correctiveActions || '',
-                    responsiblePerson: entry.responsiblePerson || '',
-                    targetCompletionDate: entry.targetCompletionDate || ''
-                  })) || [],
+                  entries: mergedData.entries?.map((entry: any) => {
+                    const h1Actual = entry.h1Actual || 0;
+                    const h2Actual = entry.h2Actual || 0;
+                    const otActual = entry.otActual || 0;
+                    const actualProduction = h1Actual + h2Actual + otActual;
+                    
+                    return {
+                      h1Actual: h1Actual,
+                      h2Actual: h2Actual,
+                      otActual: otActual,
+                      actualProduction: actualProduction,
+                      qualityDefects: entry.qualityDefects || 0,
+                      reason: entry.reason || '',
+                      correctiveActions: entry.correctiveActions || '',
+                      responsiblePerson: entry.responsiblePerson || '',
+                      targetCompletionDate: entry.targetCompletionDate || ''
+                    };
+                  }) || [],
                   notes: reportData.data.notes || ''
                 });
               }
@@ -285,10 +292,16 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
             if (response.ok) {
               const data = await response.json();
               if (data.success && data.data) {
+                const entries = data.data.entries || [{ deptName: '', operatorName: '', work: '', h1Plan: 0, h2Plan: 0, otPlan: 0, target: 0 }];
+                // Calculate target for each entry
+                const calculatedEntries = entries.map((entry: any) => ({
+                  ...entry,
+                  target: (entry.h1Plan || 0) + (entry.h2Plan || 0) + (entry.otPlan || 0)
+                }));
                 setFormData({
                   dayNumber: data.data.dayNumber,
                   date: data.data.date,
-                  entries: data.data.entries || [{ deptName: '', operatorName: '', work: '', h1Plan: 0, h2Plan: 0, otPlan: 0, target: 0 }]
+                  entries: calculatedEntries
                 });
               } else {
                 // Fallback to empty form if no data found
@@ -468,6 +481,34 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
             entries: formData.entries || [],
             notes: formData.notes || ''
           };
+          
+          // Validate action plan fields for entries with production < 85%
+          if (formData.entries) {
+            for (let i = 0; i < formData.entries.length; i++) {
+              const entry = formData.entries[i];
+              const dailyPlanEntry = dailyPlanData?.entries?.[i];
+              
+              if (dailyPlanEntry && entry.actualProduction && dailyPlanEntry.target) {
+                const percentage = (entry.actualProduction / dailyPlanEntry.target) * 100;
+                
+                if (percentage < 85 && percentage > 0) {
+                  // Check if action plan fields are filled
+                  if (!entry.reason || entry.reason.trim() === '') {
+                    throw new Error(`Reason for low production is mandatory for ${dailyPlanEntry.deptName} - ${dailyPlanEntry.operatorName} (Production: ${percentage.toFixed(1)}%)`);
+                  }
+                  if (!entry.correctiveActions || entry.correctiveActions.trim() === '') {
+                    throw new Error(`Corrective actions are mandatory for ${dailyPlanEntry.deptName} - ${dailyPlanEntry.operatorName} (Production: ${percentage.toFixed(1)}%)`);
+                  }
+                  if (!entry.responsiblePerson || entry.responsiblePerson.trim() === '') {
+                    throw new Error(`Responsible person is mandatory for ${dailyPlanEntry.deptName} - ${dailyPlanEntry.operatorName} (Production: ${percentage.toFixed(1)}%)`);
+                  }
+                  if (!entry.targetCompletionDate || entry.targetCompletionDate.trim() === '') {
+                    throw new Error(`Target completion date is mandatory for ${dailyPlanEntry.deptName} - ${dailyPlanEntry.operatorName} (Production: ${percentage.toFixed(1)}%)`);
+                  }
+                }
+              }
+            }
+          }
           break;
       }
 
@@ -705,7 +746,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         h1Plan: 0,
         h2Plan: 0,
         otPlan: 0,
-        target: 0
+        target: 0 // Will be auto-calculated when values are entered
       }]
     }));
   };
@@ -722,9 +763,29 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
     if (task?.status === 'completed') return;
     setFormData((prev: any) => ({
       ...prev,
-      entries: (prev.entries || []).map((entry: any, i: number) => 
-        i === index ? { ...entry, [field]: value } : entry
-      )
+      entries: (prev.entries || []).map((entry: any, i: number) => {
+        if (i !== index) return entry;
+        
+        const updatedEntry = { ...entry, [field]: value };
+        
+        // Auto-calculate Target for daily plan (H1 Plan + H2 Plan + OT Plan)
+        if (task?.type === 'daily' && ['h1Plan', 'h2Plan', 'otPlan'].includes(field)) {
+          const h1Plan = field === 'h1Plan' ? value : (entry.h1Plan || 0);
+          const h2Plan = field === 'h2Plan' ? value : (entry.h2Plan || 0);
+          const otPlan = field === 'otPlan' ? value : (entry.otPlan || 0);
+          updatedEntry.target = h1Plan + h2Plan + otPlan;
+        }
+        
+        // Auto-calculate Actual Production for daily report (H1 Actual + H2 Actual + OT Actual)
+        if (task?.type === 'report' && ['h1Actual', 'h2Actual', 'otActual'].includes(field)) {
+          const h1Actual = field === 'h1Actual' ? value : (entry.h1Actual || 0);
+          const h2Actual = field === 'h2Actual' ? value : (entry.h2Actual || 0);
+          const otActual = field === 'otActual' ? value : (entry.otActual || 0);
+          updatedEntry.actualProduction = h1Actual + h2Actual + otActual;
+        }
+        
+        return updatedEntry;
+      })
     }));
   };
 
@@ -746,7 +807,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                 <th>H1 Plan</th>
                 <th>H2 Plan</th>
                 <th>OT Plan</th>
-                <th>Target</th>
+                <th>Target (Auto)</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -813,11 +874,12 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                   <td>
                     <input
                       type="number"
-                      value={entry.target || ''}
-                      onChange={(e) => handleEntryChange(index, 'target', parseInt(e.target.value) || 0)}
-                      placeholder="Target"
+                      value={entry.target || 0}
+                      placeholder="Auto-calculated"
                       min="0"
                       required
+                      readOnly
+                      className="readonly-input"
                     />
                   </td>
                   <td>
@@ -889,7 +951,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                       <th>H1 Actual</th>
                       <th>H2 Actual</th>
                       <th>OT Actual</th>
-                      <th>Actual Production</th>
+                      <th>Actual Production (Auto)</th>
                       <th>Quality Defects</th>
                       <th>Production %</th>
                     </tr>
@@ -937,11 +999,11 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                         <td>
                           <input
                             type="number"
-                            placeholder="Total"
+                            placeholder="Auto-calculated"
                             min="0"
-                            className="actual-input"
-                            value={formData.entries?.[index]?.actualProduction || ''}
-                            onChange={(e) => handleEntryChange(index, 'actualProduction', parseInt(e.target.value) || 0)}
+                            className="actual-input readonly-input"
+                            value={formData.entries?.[index]?.actualProduction || 0}
+                            readOnly
                           />
                         </td>
                         <td>
@@ -977,7 +1039,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
             }) && (
               <div className="action-plan-section">
                 <h4>Action Plan for Low Production</h4>
-                <p className="warning-text">Production below 85% requires action plan details.</p>
+                <p className="warning-text">⚠️ Production below 85% requires ALL action plan fields to be filled (Reason, Corrective Actions, Responsible Person, and Target Completion Date).</p>
                 
                 {formData.entries?.map((entry: any, index: number) => {
                   const percentage = entry.actualProduction && dailyPlanData.entries[index]?.target 
@@ -993,11 +1055,11 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                       
                       <div className="action-plan-fields">
                         <div className="form-group">
-                          <label>Reason for Low Production *</label>
+                          <label className="required-label">Reason for Low Production</label>
                           <textarea
                             placeholder="Explain the reason for low production..."
                             rows={3}
-                            className="reason-textarea"
+                            className={`reason-textarea ${(!entry.reason || entry.reason.trim() === '') ? 'required-field' : ''}`}
                             value={entry.reason || ''}
                             onChange={(e) => handleEntryChange(index, 'reason', e.target.value)}
                             required
@@ -1005,11 +1067,11 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                         </div>
                         
                         <div className="form-group">
-                          <label>Corrective Actions *</label>
+                          <label className="required-label">Corrective Actions</label>
                           <textarea
                             placeholder="Describe the corrective actions to be taken..."
                             rows={3}
-                            className="corrective-actions-textarea"
+                            className={`corrective-actions-textarea ${(!entry.correctiveActions || entry.correctiveActions.trim() === '') ? 'required-field' : ''}`}
                             value={entry.correctiveActions || ''}
                             onChange={(e) => handleEntryChange(index, 'correctiveActions', e.target.value)}
                             required
@@ -1018,10 +1080,11 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                         
                         <div className="form-row">
                           <div className="form-group">
-                            <label>Responsible Person *</label>
+                            <label className="required-label">Responsible Person</label>
                             <input
                               type="text"
                               placeholder="Name of responsible person"
+                              className={(!entry.responsiblePerson || entry.responsiblePerson.trim() === '') ? 'required-field' : ''}
                               value={entry.responsiblePerson || ''}
                               onChange={(e) => handleEntryChange(index, 'responsiblePerson', e.target.value)}
                               required
@@ -1029,9 +1092,10 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
                           </div>
                           
                           <div className="form-group">
-                            <label>Target Completion Date *</label>
+                            <label className="required-label">Target Completion Date</label>
                             <input
                               type="date"
+                              className={(!entry.targetCompletionDate || entry.targetCompletionDate.trim() === '') ? 'required-field' : ''}
                               value={entry.targetCompletionDate || ''}
                               onChange={(e) => handleEntryChange(index, 'targetCompletionDate', e.target.value)}
                               required

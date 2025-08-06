@@ -663,6 +663,42 @@ input:disabled {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
+/* Required field styling */
+.required-field {
+  border-color: #dc3545 !important;
+  background-color: #fff5f5;
+}
+
+.required-field:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25) !important;
+}
+
+.required-label {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.required-label::after {
+  content: " *";
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Readonly input styling */
+.readonly-input {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+  border: 1px solid #dee2e6 !important;
+}
+
+.readonly-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #dee2e6 !important;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

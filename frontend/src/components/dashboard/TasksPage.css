@@ -93,6 +93,7 @@
   margin-bottom: 15px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -151,7 +152,7 @@
 }
 
 .task-due-date {
-  color: #ff6b6b;
+  color: #6c757d;
   font-weight: 600;
 }
 
@@ -188,27 +189,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
 }
 
 .task-action-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .task-action-btn.primary {
   background-color: #007bff;
   color: white;
+  border: 2px solid #007bff;
+  position: relative;
+  overflow: hidden;
 }
 
 .task-action-btn.primary:hover {
   background-color: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-action-btn.primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .download-buttons {
@@ -217,33 +231,42 @@
 }
 
 .download-btn {
-  padding: 0.4rem 0.8rem;
+  padding: 0.3rem 0.6rem;
   border: none;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  opacity: 0.8;
+}
+
+.download-btn:hover {
+  opacity: 1;
 }
 
 .download-btn.pdf {
-  background-color: #dc3545;
+  background-color: #6c757d;
   color: white;
+  border: 1px solid #6c757d;
 }
 
 .download-btn.pdf:hover {
-  background-color: #c82333;
+  background-color: #5a6268;
+  border-color: #5a6268;
 }
 
 .download-btn.excel {
-  background-color: #28a745;
+  background-color: #6c757d;
   color: white;
+  border: 1px solid #6c757d;
 }
 
 .download-btn.excel:hover {
-  background-color: #218838;
+  background-color: #5a6268;
+  border-color: #5a6268;
 }
 
 /* Responsive Design for TasksPage */
