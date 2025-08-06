@@ -87,60 +87,79 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
       try {
         setLoadingPlan(true);
         
-        // First, try to fetch the daily plan directly
-        let response = await fetch(`${buildApiUrl('/api/production/daily')}/${task.planId}?_t=${Date.now()}`, {
+        // For reports, we need to first fetch the report to get the dailyPlanId
+        console.log('Fetching daily report to get dailyPlanId...');
+        let response = await fetch(`${buildApiUrl('/api/production/reports')}/${task.planId}?_t=${Date.now()}`, {
           headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache'
           }
         });
 
-        // If that fails, try to fetch the daily report and get the dailyPlanId
-        if (!response.ok) {
-          console.log('Daily plan not found, trying to fetch daily report...');
-          response = await fetch(`${buildApiUrl('/api/production/reports')}/${task.planId}?_t=${Date.now()}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Cache-Control': 'no-cache'
-            }
-          });
-
-          if (response.ok) {
-            const reportData = await response.json();
-            if (reportData.success && reportData.data.dailyPlanId) {
-              // Now fetch the actual daily plan using the dailyPlanId
-              response = await fetch(`${buildApiUrl('/api/production/daily')}/${reportData.data.dailyPlanId}?_t=${Date.now()}`, {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Cache-Control': 'no-cache'
-                }
-              });
-            }
-          }
-        }
-
         if (response.ok) {
-          const data = await response.json();
-          if (data.success) {
-            setDailyPlanData(data.data);
-            // Initialize form data for reports
-            setFormData({
-              entries: data.data.entries?.map((entry: any) => ({
-                h1Actual: 0,
-                h2Actual: 0,
-                otActual: 0,
-                actualProduction: 0,
-                qualityDefects: 0,
-                reason: '',
-                correctiveActions: '',
-                responsiblePerson: '',
-                targetCompletionDate: ''
-              })) || [],
-              notes: ''
+          const reportData = await response.json();
+          if (reportData.success && reportData.data.dailyPlanId) {
+            console.log('Found dailyPlanId:', reportData.data.dailyPlanId);
+            
+            // Now fetch the actual daily plan using the dailyPlanId
+            const planResponse = await fetch(`${buildApiUrl('/api/production/daily')}/${reportData.data.dailyPlanId}?_t=${Date.now()}`, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
+              }
             });
+
+            if (planResponse.ok) {
+              const planData = await planResponse.json();
+              if (planData.success) {
+                // Merge daily plan data with report data
+                const mergedData = {
+                  ...planData.data,
+                  entries: planData.data.entries?.map((planEntry: any, index: number) => {
+                    const reportEntry = reportData.data.entries?.[index] || {};
+                    return {
+                      ...planEntry,
+                      h1Actual: reportEntry.h1Actual || 0,
+                      h2Actual: reportEntry.h2Actual || 0,
+                      otActual: reportEntry.otActual || 0,
+                      actualProduction: reportEntry.actualProduction || 0,
+                      qualityDefects: reportEntry.qualityDefect || 0,
+                      reason: reportEntry.reason || '',
+                      correctiveActions: reportEntry.correctiveActions || '',
+                      responsiblePerson: reportEntry.responsiblePerson || '',
+                      targetCompletionDate: reportEntry.targetCompletionDate || ''
+                    };
+                  }) || []
+                };
+
+                setDailyPlanData(mergedData);
+                
+                // Initialize form data with merged data
+                setFormData({
+                  entries: mergedData.entries?.map((entry: any) => ({
+                    h1Actual: entry.h1Actual || 0,
+                    h2Actual: entry.h2Actual || 0,
+                    otActual: entry.otActual || 0,
+                    actualProduction: entry.actualProduction || 0,
+                    qualityDefects: entry.qualityDefects || 0,
+                    reason: entry.reason || '',
+                    correctiveActions: entry.correctiveActions || '',
+                    responsiblePerson: entry.responsiblePerson || '',
+                    targetCompletionDate: entry.targetCompletionDate || ''
+                  })) || [],
+                  notes: reportData.data.notes || ''
+                });
+              }
+            } else {
+              console.error('Failed to fetch daily plan data:', planResponse.status);
+            }
+          } else {
+            console.error('No dailyPlanId found in report data');
+            return;
           }
         } else {
-          console.error('Failed to fetch daily plan data:', response.status);
+          console.error('Failed to fetch daily report:', response.status);
+          return;
         }
       } catch (err) {
         console.error('Error fetching daily plan data:', err);
