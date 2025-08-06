@@ -1157,7 +1157,9 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
               <div className="status-badge pending">⏳ Pending</div>
             )}
             {task.status === 'inProgress' && (
-              <div className="status-badge in-progress">🔄 In Progress</div>
+              <div className="status-badge in-progress">
+                {task.type === 'daily' && canApprove() ? '⏳ Pending Approval' : '🔄 In Progress'}
+              </div>
             )}
           </div>
           <button onClick={onClose} className="close-btn">&times;</button>

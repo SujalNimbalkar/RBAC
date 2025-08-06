@@ -54,6 +54,14 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
     }
   };
 
+  const getStatusDisplay = (task: ProductionTask) => {
+    // For daily plans that are inProgress and can be approved, show "Pending Approval"
+    if (task.type === 'daily' && task.status === 'inProgress' && canApprove()) {
+      return 'Pending Approval';
+    }
+    return task.status;
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString();
   };
@@ -248,7 +256,7 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
               
               <div className="task-meta">
                 <div className="task-status" style={{ backgroundColor: getStatusColor(task.status) }}>
-                  {task.status}
+                  {getStatusDisplay(task)}
                 </div>
                 <div className="task-assignee">
                   <span className="assignee-avatar">P</span>
