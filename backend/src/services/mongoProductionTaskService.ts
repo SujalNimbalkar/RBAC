@@ -20,7 +20,7 @@ export class MongoProductionTaskService {
   }
 
   static async getAll(): Promise<IProductionTask[]> {
-    return await ProductionTask.find().sort({ createdAt: -1 }).limit(1000);
+    return await ProductionTask.find().sort({ createdAt: -1 }).limit(200).lean();
   }
 
   static async clearAll(): Promise<void> {
@@ -28,15 +28,15 @@ export class MongoProductionTaskService {
   }
 
   static async findByType(type: string): Promise<IProductionTask[]> {
-    return await ProductionTask.find({ type }).sort({ createdAt: -1 });
+    return await ProductionTask.find({ type }).sort({ createdAt: -1 }).limit(100).lean();
   }
 
   static async findByAssignedTo(assignedTo: string): Promise<IProductionTask[]> {
-    return await ProductionTask.find({ assignedTo }).sort({ createdAt: -1 });
+    return await ProductionTask.find({ assignedTo }).sort({ createdAt: -1 }).limit(100).lean();
   }
 
   static async findByStatus(status: string): Promise<IProductionTask[]> {
-    return await ProductionTask.find({ status }).sort({ createdAt: -1 });
+    return await ProductionTask.find({ status }).sort({ createdAt: -1 }).limit(100).lean();
   }
 
   static async getByUser(userId: string): Promise<IProductionTask[]> {

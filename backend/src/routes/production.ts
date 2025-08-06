@@ -1133,12 +1133,16 @@ router.get('/test', async (req: Request, res: Response) => {
   });
 });
 
-// Get all tasks (temporarily without auth for testing)
+// Get all tasks with pagination
 router.get('/tasks', async (req: Request, res: Response) => {
   try {
     console.log('User authenticated:', req.user);
     console.log('User roles:', req.userRoles);
     console.log('User permissions:', req.userPermissions);
+    
+    // Add pagination to prevent memory overload
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = Math.min(parseInt(req.query.limit as string) || 50, 100); // Max 100 items
     
     let tasks = await MongoProductionTaskService.getAll();
     // Backend safeguard: if Plant Head or Admin, only return inProgress daily tasks and exclude reports
@@ -1163,13 +1167,20 @@ router.get('/tasks', async (req: Request, res: Response) => {
         return t.type === 'daily' || t.type === 'report';
       });
     }
+    
+    // Apply pagination after filtering
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedTasks = tasks.slice(startIndex, endIndex);
+    
     res.json({
       success: true,
       data: {
-        tasks,
+        tasks: paginatedTasks,
         total: tasks.length,
-        page: 1,
-        limit: tasks.length
+        page: page,
+        limit: limit,
+        totalPages: Math.ceil(tasks.length / limit)
       }
     });
   } catch (error) {
