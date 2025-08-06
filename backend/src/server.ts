@@ -16,7 +16,7 @@ import rbacRoutes from './routes/rbac';
 import productionRoutes from './routes/production';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Middleware
 app.use(cors({
@@ -136,13 +136,14 @@ const startServer = async () => {
     // Initialize cron service
     CronService.initialize();
     
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server is running on port ${PORT}`);
       console.log(`📊 Health check available at http://localhost:${PORT}/api/health`);
       console.log(`🔗 API Documentation available at http://localhost:${PORT}/`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🗄️  Database: MongoDB Atlas`);
       console.log(`🕐 Cron service initialized with automated production plans`);
+      console.log(`🌐 Server bound to 0.0.0.0:${PORT} for Render.com compatibility`);
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error);
