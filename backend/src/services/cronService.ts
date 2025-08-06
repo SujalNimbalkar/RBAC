@@ -44,10 +44,7 @@ export class CronService {
       console.log(`📋 Creating monthly production plan for ${nextMonth}/${nextYear} (next month)`);
 
       // Check if monthly plan already exists for this month/year
-      const existingPlans = await MongoMonthlyPlanService.getAll();
-      const existingPlan = existingPlans.find(plan => 
-        plan.month === nextMonth && plan.year === nextYear
-      );
+      const existingPlan = await MongoMonthlyPlanService.findByMonthAndYear(nextMonth, nextYear);
 
       if (existingPlan) {
         console.log(`⚠️  Monthly plan already exists for ${nextMonth}/${nextYear}`);
@@ -77,23 +74,22 @@ export class CronService {
       console.log(`📋 Creating task for monthly plan...`);
       const task = await MongoProductionTaskService.create({
         id: generateId(),
-        type: 'monthly',
         title: `Monthly Production Plan - ${this.getMonthName(nextMonth)} ${nextYear}`,
-        assignedTo: monthlyPlan.assignedTo,
-        assignedRole: monthlyPlan.assignedRole,
-        planId: monthlyPlan.id,
+        description: `Create and submit monthly production plan for ${this.getMonthName(nextMonth)} ${nextYear}`,
+        type: 'monthly',
+        status: 'pending',
+        priority: 'high',
+        assignedTo: 'mdsxto8ydv4dknv25i', // Amit Kumar Parida
+        assignedRole: 'mdsvs0sm4g2ebejicna', // Production Manager
         deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days from now
-        status: 'pending'
+        planId: monthlyPlan.id
       });
 
-      console.log(`✅ Task created successfully: ${task.title}`);
-      console.log(`📋 Task ID: ${task.id}`);
-      console.log(`📋 Task Type: ${task.type}`);
-      console.log(`📋 Task Status: ${task.status}`);
+      console.log(`✅ Task created for monthly plan: ${task.title}`);
+      console.log(`📋 Task ID: ${task.id}, Type: ${task.type}, Status: ${task.status}`);
 
     } catch (error) {
-      console.error('❌ Error creating monthly production plan:', error);
-      console.error('❌ Error details:', (error as Error).message);
+      console.error('❌ Error creating monthly production plan:', (error as Error).message);
       if ((error as Error).stack) {
         console.error('❌ Stack trace:', (error as Error).stack);
       }
@@ -108,19 +104,23 @@ export class CronService {
     return months[month - 1];
   }
 
-  // Manual trigger for testing
+  private static getWeekNumber(date: Date): number {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  }
+
   static async triggerMonthlyPlan() {
-    console.log('🧪 Manually triggering monthly production plan...');
+    console.log('🚀 Manually triggering monthly production plan creation...');
     await this.createMonthlyProductionPlan();
   }
 
-  // Get cron status
   static getStatus() {
     return {
       initialized: this.isInitialized,
       schedules: {
-        monthly: '15 16 4 * * (4th of every month at 16:15 IST)'
+        monthly: 'Every month on 4th at 16:15 IST'
       }
     };
   }
-} 
+}

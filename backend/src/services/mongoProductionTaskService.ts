@@ -20,7 +20,7 @@ export class MongoProductionTaskService {
   }
 
   static async getAll(): Promise<IProductionTask[]> {
-    return await ProductionTask.find().sort({ createdAt: -1 });
+    return await ProductionTask.find().sort({ createdAt: -1 }).limit(1000);
   }
 
   static async clearAll(): Promise<void> {

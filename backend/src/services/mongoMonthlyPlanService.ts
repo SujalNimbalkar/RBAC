@@ -20,14 +20,14 @@ export class MongoMonthlyPlanService {
   }
 
   static async getAll(): Promise<IMonthlyPlan[]> {
-    return await MonthlyPlan.find().sort({ createdAt: -1 });
-  }
-
-  static async clearAll(): Promise<void> {
-    await MonthlyPlan.deleteMany({});
+    return await MonthlyPlan.find().sort({ createdAt: -1 }).limit(100);
   }
 
   static async findByMonthAndYear(month: number, year: number): Promise<IMonthlyPlan | null> {
     return await MonthlyPlan.findOne({ month, year });
+  }
+
+  static async clearAll(): Promise<void> {
+    await MonthlyPlan.deleteMany({});
   }
 } 

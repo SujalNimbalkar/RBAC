@@ -37,7 +37,7 @@ export class MongoUserService {
   }
 
   static async getAll(): Promise<IUser[]> {
-    return await User.find().sort({ createdAt: -1 });
+    return await User.find().sort({ createdAt: -1 }).limit(500);
   }
 
   static async clearAll(): Promise<void> {
