@@ -127,8 +127,4 @@ config.local.js
 config.local.json
 
 # Admin tokens (security)
-admin-token.json
-
-# Google App Engine deployment files
-env_variables.yaml
-app.yaml 
+admin-token.json 

@@ -1,24 +1,21 @@
 {
-  "name": "rbac3-production-planning",
+  "name": "rbac3",
   "version": "1.0.0",
-  "description": "RBAC3 Production Planning System",
-  "main": "backend/dist/server.js",
+  "description": "RBAC3 Application with React Frontend and Node.js Backend",
+  "main": "index.js",
   "scripts": {
-    "start": "cd backend && npm start",
-    "build": "cd backend && npm run build",
-    "dev": "cd backend && npm run dev"
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
   },
-  "engines": {
-    "node": "18.x",
-    "npm": "9.x"
-  },
-  "keywords": [
-    "rbac",
-    "production-planning",
-    "nodejs",
-    "react",
-    "mongodb"
-  ],
-  "author": "Your Name",
-  "license": "MIT"
+  "keywords": ["rbac", "react", "node", "express", "typescript"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 } 
