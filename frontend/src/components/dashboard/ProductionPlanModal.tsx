@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { buildApiUrl } from '../../config/api';
 import { useAuth } from '../../contexts/AuthContext';
 import './ProductionPlanModal.css';
 import DailyPlanApprovalModal from './DailyPlanApprovalModal';
@@ -87,7 +88,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         setLoadingPlan(true);
         
         // First, try to fetch the daily plan directly
-        let response = await fetch(`http://localhost:5000/api/production/daily/${task.planId}?_t=${Date.now()}`, {
+        let response = await fetch(`${buildApiUrl('/api/production/daily')}/${task.planId}?_t=${Date.now()}`, {
           headers: {
             'Content-Type': 'application/json',
             'Cache-Control': 'no-cache'
@@ -97,7 +98,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         // If that fails, try to fetch the daily report and get the dailyPlanId
         if (!response.ok) {
           console.log('Daily plan not found, trying to fetch daily report...');
-          response = await fetch(`http://localhost:5000/api/production/reports/${task.planId}?_t=${Date.now()}`, {
+          response = await fetch(`${buildApiUrl('/api/production/reports')}/${task.planId}?_t=${Date.now()}`, {
             headers: {
               'Content-Type': 'application/json',
               'Cache-Control': 'no-cache'
@@ -108,7 +109,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
             const reportData = await response.json();
             if (reportData.success && reportData.data.dailyPlanId) {
               // Now fetch the actual daily plan using the dailyPlanId
-              response = await fetch(`http://localhost:5000/api/production/daily/${reportData.data.dailyPlanId}?_t=${Date.now()}`, {
+              response = await fetch(`${buildApiUrl('/api/production/daily')}/${reportData.data.dailyPlanId}?_t=${Date.now()}`, {
                 headers: {
                   'Content-Type': 'application/json',
                   'Cache-Control': 'no-cache'
@@ -169,7 +170,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         case 'monthly':
           // Fetch existing monthly plan data if available
           try {
-            const response = await fetch(`http://localhost:5000/api/production/monthly/${task.planId}?_t=${Date.now()}`, {
+            const response = await fetch(`${buildApiUrl('/api/production/monthly')}/${task.planId}?_t=${Date.now()}`, {
               headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
@@ -210,7 +211,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         case 'weekly':
           // Fetch existing weekly plan data if available
           try {
-            const response = await fetch(`http://localhost:5000/api/production/weekly/${task.planId}?_t=${Date.now()}`, {
+            const response = await fetch(`${buildApiUrl('/api/production/weekly')}/${task.planId}?_t=${Date.now()}`, {
               headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
@@ -255,7 +256,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
         case 'daily':
           // Fetch existing daily plan data if available
           try {
-            const response = await fetch(`http://localhost:5000/api/production/daily/${task.planId}?_t=${Date.now()}`, {
+            const response = await fetch(`${buildApiUrl('/api/production/daily')}/${task.planId}?_t=${Date.now()}`, {
               headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
@@ -363,7 +364,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
     
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/production/daily/${task.planId}?_t=${Date.now()}`, {
+      const response = await fetch(`${buildApiUrl('/api/production/daily')}/${task.planId}?_t=${Date.now()}`, {
         headers: {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache'
@@ -452,7 +453,7 @@ const ProductionPlanModal: React.FC<ProductionPlanModalProps> = ({
       }
 
       console.log('Submitting data:', JSON.stringify(submitData, null, 2));
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`${buildApiUrl(endpoint)}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

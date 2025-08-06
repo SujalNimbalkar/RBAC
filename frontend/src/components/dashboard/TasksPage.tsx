@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { buildApiUrl } from '../../config/api';
 import ProductionPlanModal from './ProductionPlanModal';
 import './TasksPage.css';
 import { canApproveDailyPlans, canSubmitDailyPlans } from '../../utils/roleUtils';
@@ -104,7 +105,7 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
           return;
       }
       
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(buildApiUrl(endpoint), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -137,13 +138,13 @@ const TasksPage: React.FC<TasksPageProps> = ({ searchTerm }) => {
       let response;
       // If Plant Head, fetch only inProgress daily tasks
       if (canApprove()) {
-        response = await fetch('http://localhost:5000/api/production/tasks', {
+        response = await fetch(buildApiUrl('/api/production/tasks'), {
           headers: {
             'Content-Type': 'application/json'
           }
         });
       } else {
-        response = await fetch('http://localhost:5000/api/production/tasks', {
+        response = await fetch(buildApiUrl('/api/production/tasks'), {
           headers: {
             'Content-Type': 'application/json'
           }

@@ -1,6 +1,7 @@
 const axios = require("axios");
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL =
+  process.env.API_BASE_URL || "https://rbac-ma5a.onrender.com/api";
 const ADMIN_TOKEN =
   "bWRzeHRvOHA5amJrbGdmODN0ajpzYkBibGFja2NhdC5pbjoxNzU0MzAxNDc4MzYy";
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { buildApiUrl } from '../../config/api';
 import { useAuth } from '../../contexts/AuthContext';
 import './DailyPlanApprovalModal.css';
 
@@ -60,7 +61,7 @@ const DailyPlanApprovalModal: React.FC<DailyPlanApprovalModalProps> = ({
     setError(null);
     
     try {
-      const response = await fetch(`http://localhost:5000/api/production/daily/${plan?.id}/approve?_t=${Date.now()}`, {
+      const response = await fetch(`${buildApiUrl('/api/production/daily')}/${plan?.id}/approve?_t=${Date.now()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ const DailyPlanApprovalModal: React.FC<DailyPlanApprovalModalProps> = ({
     setError(null);
     
     try {
-      const response = await fetch(`http://localhost:5000/api/production/daily/${plan?.id}/reject?_t=${Date.now()}`, {
+      const response = await fetch(`${buildApiUrl('/api/production/daily')}/${plan?.id}/reject?_t=${Date.now()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
